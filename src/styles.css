@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #0b0e14;
+  color: #e7e9ee;
+}
+header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #232634;
+  background: #0f1320;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+.container {
+  padding: 16px 20px;
+}
+.controls {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 12px 0 18px;
+}
+input,
+select,
+button {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #2a2f45;
+  background: #121729;
+  color: #e7e9ee;
+}
+button {
+  cursor: pointer;
+}
+.btn {
+  background: #1e293b;
+}
+.btn:hover {
+  background: #263247;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid #2a2f45;
+}
+.badge.risk {
+  background: #3a0e10;
+  color: #ffd8d8;
+  border-color: #7a1e22;
+}
+.badge.ok {
+  background: #0c2a1a;
+  color: #d0ffe3;
+  border-color: #1b6a3b;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid #232634;
+  text-align: left;
+  vertical-align: top;
+}
+.table th {
+  font-size: 12px;
+  color: #9ba3b0;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.table td {
+  font-size: 14px;
+}
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+.card {
+  background: #0f1320;
+  border: 1px solid #232634;
+  border-radius: 12px;
+  padding: 12px;
+}
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #c1c8d6;
+}
+.small {
+  font-size: 12px;
+  color: #a3aec2;
+}
+.footer {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #8c93a5;
+}
+.status {
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid #2a2f45;
+  background: #121729;
+  font-size: 12px;
+}
+.flex {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

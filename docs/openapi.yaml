@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: LogiDog Alerts API (MVP)
+  version: 0.1.0
+paths:
+  /shipments:
+    get:
+      summary: List shipments
+      parameters:
+        - in: query
+          name: q
+          schema: { type: string }
+          description: Search in id/customer/origin/destination
+        - in: query
+          name: status
+          schema: { type: string, enum: [created,picked_up,in_transit,at_customs,out_for_delivery,delivered] }
+        - in: query
+          name: mode
+          schema: { type: string, enum: [air,sea,road,rail] }
+        - in: query
+          name: carrier
+          schema: { type: string }
+        - in: query
+          name: riskOnly
+          schema: { type: boolean }
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: pageSize
+          schema: { type: integer, minimum: 1, maximum: 200, default: 50 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: '#/components/schemas/Shipment' }
+                  page: { type: integer }
+                  pageSize: { type: integer }
+                  total: { type: integer }
+  /shipments/at-risk:
+    get:
+      summary: List only shipments flagged at risk by current policy
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Shipment' }
+  /shipments/{id}:
+    get:
+      summary: Get a single shipment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Shipment' }
+components:
+  schemas:
+    Shipment:
+      type: object
+      properties:
+        shipmentId: { type: string }
+        customer: { type: string }
+        origin: { type: string }
+        destination: { type: string }
+        plannedPickup: { type: string, format: date-time }
+        pickedUpAt: { type: string, format: date-time, nullable: true }
+        plannedDelivery: { type: string, format: date-time }
+        etaFromCarrier: { type: string, format: date-time, nullable: true }
+        currentStage: { type: string, enum: [created,picked_up,in_transit,at_customs,out_for_delivery,delivered] }
+        lastScanAt: { type: string, format: date-time, nullable: true }
+        mode: { type: string, enum: [air,sea,road,rail] }
+        carrier: { type: string }
+        customsHold: { type: boolean }
+        hubDelayMinutes: { type: integer }
+        weatherAlert: { type: boolean }
+        exceptionsCount: { type: integer }
